@@ -1,81 +1,67 @@
-# WM8960 Audio HAT
-
-The drivers of [WM8960 Audio HAT] for Raspberry Pi.
-
-http://www.waveshare.net/shop/WM8960-Audio-HAT.htm
-
-http://www.waveshare.com/wm8960-audio-hat.htm
-
-### Install wm8960-soundcard
-Get the wm8960 soundcard source code. and install all linux kernel drivers
-
-```bash
-git clone https://github.com/waveshare/WM8960-Audio-HAT
-cd WM8960-Audio-HAT
-sudo ./install.sh 
-sudo reboot
-```
-
-While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
-
-Check that the sound card name matches the source code wm8960-soundcard.
-
-```bash
-pi@raspberrypi:~ $ aplay -l
-**** List of PLAYBACK Hardware Devices ****
-card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]
-  Subdevices: 7/7
-  Subdevice #0: subdevice #0
-  Subdevice #1: subdevice #1
-  Subdevice #2: subdevice #2
-  Subdevice #3: subdevice #3
-  Subdevice #4: subdevice #4
-  Subdevice #5: subdevice #5
-  Subdevice #6: subdevice #6
-card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 ALSA [bcm2835 IEC958/HDMI]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
-card 1: wm8960soundcard [wm8960-soundcard], device 0: bcm2835-i2s-wm8960-hifi wm8960-hifi-0 []
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
-pi@raspberrypi:~ $ arecord -l
-**** List of CAPTURE Hardware Devices ****
-card 1: wm8960soundcard [wm8960-soundcard], device 0: bcm2835-i2s-wm8960-hifi wm8960-hifi-0 []
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
-
-```
-If you want to change the alsa settings, You can use `sudo alsactl --file=/etc/wm8960-soundcard/wm8960_asound.state  store` to save it.
 
 
-### Usage:
-```bash
-#It will capture sound an playback on hw:1
-arecord -f cd -Dhw:1 | aplay -Dhw:1
-```
+## This is the installation script for the **RASPIAUDIO ULTRA++** sound card for raspberry pi, more info here:
 
-```bash
-#capture sound 
-#arecord -d 10 -r 16000 -c 1 -t wav -f S16_LE test.wav
-arecord -D hw:1,0 -f S32_LE -r 16000 -c 2 test.wav
-```
+https://raspiaudio.com/produit/ultra
 
-```bash
-#play sound file test.wav
-aplay -D hw:1,0 test.wav
-```
+THe complete installation guide is here:
+https://forum.raspiaudio.com/t/ultra-installation-guide/21
 
-### uninstall wm8960-soundcard
-If you want to upgrade the driver , you need uninstall the driver first.
+**But in short you should:**
+Clone the driver and install it with commands copy and paste each line in a terminal window:
 
-```bash
-pi@raspberrypi:~/WM8960-Audio-HAT $ sudo ./uninstall.sh 
-...
+> git clone https://github.com/RASPIAUDIO/WM8960-Audio-HAT.git cd
+> WM8960-Audio-HAT sudo ./install.sh
 
-------------------------------------------------------
-Please reboot your raspberry pi to apply all settings
-Thank you!
-------------------------------------------------------
-```
+it could take a long time 5 minutes on a PI4, but 15mn or more on a Pi zero, so relax go get a drink then
 
-Enjoy !
+> sudo reboot
+
+## **Features:**
+
+Imput:
+
+onboard microphone Left, Right
+Jack microphone
+Jack line input
+push button
+Outputs:
+
+1.3w onboard stereo spakers (pre-soldered)
+1.3w output stereo for external speakers
+Headphone jack stereo
+red led
+
+
+**Features:**
+
+65x30x15mm (compact Raspberry pi Zero format=
+Compatible with raspberry 4 (all version), Raspberry 3 (all versions), Zero (all versions)
+Standard Raspberry Pi 40PIN GPIO extension header, supports Raspberry Pi series boards
+Integrates WM8960 low power stereo CODEC, communicates via I2S interface
+Integrates dual high-quality MEMS silicon Mic, supports left & right double channels recording, nice sound quality
+Onboard standard 3.5mm earphone jack, play music via external earphone
+Onboard dual-channel speaker interface, directly drives speakers
+Supports sound effects such as stereo, 3D surrounding, etc.
+Headphone output (24bits)​ WM8960
+input / output Mixer
+Hardware volume control
+24 Bit I2S Dac​
+2×1.3W Stereo Amplifier for external speakers​
+Stereo onbard speakers
+2 Onboard microphones​
+Stereo 3.5mm LINE jack input
+Stereo 3.5mm MICROPHONE jack input
+ 
+
+CODEC: WM8960
+Power supply: 5V
+Logic voltage: 3.3V
+Control interface: I2C
+Audio interface: I2S
+DAC signal-noise ratio: 98dB
+ADC signal-noise ratio: 94dB
+Earphone driver: 40mW (16Ω@3.3V)
+Speaker driver: 1.3W per channel (8Ω BTL)
+To use as a standalone speaker (expect the same quality and power as a high end phone).
+To use with as pair of old non amplified system from a backyard sell. Could be used for radio project, standalone art project,as a all in one audio card, project where you need to record live audio or play it using speakers or headphones.
