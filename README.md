@@ -12,7 +12,9 @@ https://forum.raspiaudio.com/t/ultra-installation-guide/21
 Clone the driver and install it with commands copy and paste each line in a terminal window:
 
 > git clone https://github.com/RASPIAUDIO/WM8960-Audio-HAT.git 
+> 
 > cd WM8960-Audio-HAT 
+> 
 > sudo ./install.sh
 
 it could take a long time 5 minutes on a PI4, but 15mn or more on a Pi zero, so relax go get a drink then
