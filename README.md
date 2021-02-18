@@ -1,7 +1,8 @@
 
 
-## This is the installation script for the **RASPIAUDIO ULTRA++** sound card for raspberry pi, more info here:
+## This is the installation script for the **RASPIAUDIO ULTRA++** sound card for raspberry pi
 
+More info here:
 https://raspiaudio.com/produit/ultra
 
 THe complete installation guide is here:
