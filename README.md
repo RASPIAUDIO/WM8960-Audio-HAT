@@ -23,7 +23,7 @@ Before restarting do:
 > sudo nano /etc/pulse/default.pa    
 
 Then add the following lines:
-> load-module module-alsa-source device = hw: 0,0 
+> load-module module-alsa-source device = hw: 0,0       
 > load-module module-alsa-sink
 
 Lastly Reboot using:    
