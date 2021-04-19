@@ -17,8 +17,16 @@ Clone the driver and install it with commands copy and paste each line in a term
 > 
 > sudo ./install.sh
 
-it could take a long time 5 minutes on a PI4, but 15mn or more on a Pi zero, so relax go get a drink then
+It could take a long time 5 minutes on a PI4, but 15mn or more on a Pi zero, so relax go get a drink then.     
 
+Before restarting do:
+> sudo nano /etc/pulse/default.pa    
+
+Then add the following lines:
+> load-module module-alsa-source device = hw: 0,0       
+> load-module module-alsa-sink
+
+Lastly Reboot using:    
 > sudo reboot
 
 ## **Features:**

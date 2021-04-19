@@ -66,11 +66,13 @@ sed -i -e 's:#dtparam=i2c_arm=on:dtparam=i2c_arm=on:g'  /boot/config.txt || true
 grep -q "dtoverlay=i2s-mmap" /boot/config.txt || \
   echo "dtoverlay=i2s-mmap" >> /boot/config.txt
 
-grep -q "dtparam=i2s=on" /boot/config.txt || \
-  echo "dtparam=i2s=on" >> /boot/config.txt
-
 grep -q "dtoverlay=wm8960-soundcard" /boot/config.txt || \
   echo "dtoverlay=wm8960-soundcard" >> /boot/config.txt
+
+ sed -i \
+  -e "s/^dtparam=audio=on/#\0/" \
+  -e "s/^#\(dtparam=i2s=on\)/\1/" \
+  /boot/config.txt
   
 #install config files
 mkdir /etc/wm8960-soundcard || true
