@@ -1,0 +1,49 @@
+ #!/bin/bash
+#init led & button
+echo 25 >/sys/class/gpio/export
+echo out >/sys/class/gpio/gpio25/direction
+echo 23 >/sys/class/gpio/export
+echo in >/sys/class/gpio/gpio23/direction
+
+#led ON
+echo 1 >/sys/class/gpio/gpio25/value
+
+echo  "-----> Test for Raspiaudio ULTRA+"
+echo  "------Please push on the Blue button to continue"
+
+
+
+#waiting button pressed
+while [ `cat /sys/class/gpio/gpio23/value` = 1 ]; do
+set i = 1
+done
+#led OFF
+echo 0 >/sys/class/gpio/gpio25/value
+
+alsactl --file actualP store
+
+echo recording first from right then from left
+#record 10s first from right microphone then from left one
+arecord -d10 -f cd -t raw test.raw &
+
+alsactl --file rightP restore
+aplay -t raw -r 44100 500hz.raw
+sleep 1
+alsactl --file leftP restore
+aplay -t raw -r 44100 500hz.raw
+sleep 6
+
+alsactl --file actualP restore
+
+echo "playing the recording...  right... left..."
+#play record
+aplay -t raw -f cd test.raw
+
+echo "------------------------------------------------------------------------"
+echo "Test is done to adjust speakers volume and microphone gain run: alsamixer"
+rm test.raw
+echo 25 > /sys/class/gpio/unexport
+echo 23 > /sys/class/gpio/unexport
+exit
+
+
