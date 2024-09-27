@@ -1369,6 +1369,7 @@ static const struct snd_soc_dai_ops wm8960_dai_ops = {
 	.set_clkdiv = wm8960_set_dai_clkdiv,
 	.set_pll = wm8960_set_dai_pll,
 	.set_sysclk = wm8960_set_dai_sysclk,
+	.no_capture_mute = 1,
 };
 
 static struct snd_soc_dai_driver wm8960_dai = {
@@ -1386,7 +1387,7 @@ static struct snd_soc_dai_driver wm8960_dai = {
 		.rates = WM8960_RATES,
 		.formats = WM8960_FORMATS,},
 	.ops = &wm8960_dai_ops,
-	.symmetric_rates = 1,
+	.symmetric_rate = 1,
 };
 
 static int wm8960_probe(struct snd_soc_component *component)
